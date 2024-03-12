@@ -8,6 +8,8 @@ Data structure mainly specifies the following four things:
 - Degree of associativity
 - Processing alternatives for information
 
+  >Program = Algorithm + Data Structure
+
 ---
 
 ## Classification/Types of Data Structures:
@@ -24,4 +26,3 @@ Data structure mainly specifies the following four things:
 
   ![datastructureimage](../images//datastruc.jpg)
 
-  
