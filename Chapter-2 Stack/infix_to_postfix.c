@@ -51,7 +51,7 @@ getch();
 
 }
 
-int precedency(chat ch){
+int precedency(char ch){
     switch(ch){
         case '$':
             return (4);
