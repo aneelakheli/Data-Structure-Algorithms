@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <conio.h>
+//#include <conio.h>
 
 #define SIZE 10
 
@@ -16,7 +16,11 @@ void displayItem(qe *); //function prototype
 
 int main(){
 int choose;
-qe *q;
+qe *q = (qe *) malloc(sizeof(qe));
+if(q ==NULL){
+    printf("Memory allocation failed\n");
+    exit(1);
+}
 q->rear=-1;
 q->front=0;
 printf("\n Menu for programs:\n\n");
@@ -40,7 +44,6 @@ do{
     }
 }
 while(choose < 10);
-getch();
 return 0;
 }
 
@@ -81,7 +84,7 @@ if(q->rear < q->front){
 printf("Queue is Empty");
 }
 else{
-    for(i=q->front;i<q->=rear;i++){
+    for(i=q->front;i< q->rear; i++){
     printf("\n %d \n",q->queue[i]);
     }
 }
