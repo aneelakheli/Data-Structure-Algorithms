@@ -30,12 +30,12 @@ int main(){
         scanf("%d",&choice);
         switch(choice){
             case 1:
-                printf("Enter item to be inserted.\n");
+                printf("\n Enter item to be inserted.\n");
                 scanf("%d",&element);
                 insert_at_first(element);
                 break;
             case 2:
-                printf("Enter item to be insert at desired position");
+                printf("\n Enter item to be insert at desired position");
                 scanf("%d",&element);
                 insert_at_given_position(element);
                 break;
@@ -70,7 +70,7 @@ int main(){
                 printf("invalid Choice \n ");
         }
     }
-    while(choice <10);
+    while(choice < 10);
     return 0;
 }
 
