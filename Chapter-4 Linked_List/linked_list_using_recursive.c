@@ -26,6 +26,17 @@ void create(int A[], int n){
     }
 }
 
+int count(struct Node *p){
+    int length =0;
+    while(p){
+        length++;
+        p=p->next;
+    }
+    return length;
+}
+
+
+
 void display(struct Node *p){
     while(p!=NULL){
         printf("%d \t", p->data);
@@ -46,10 +57,25 @@ void R_Display(struct Node *p){
 }
 
 
+
+//recursive count function
+
+int R_count(struct Node *p){
+    if(p!=NULL){
+        return R_count(p->next) + 1;
+    }else{
+        return 0;
+    }
+
+}
+
 int main(){
 
     int A[] =  {2,3,4,5,6,7,8};
     create(A,6);
+    printf("The total length is %d\n\n", count(first));
+
+
     display(first);
     R_Display(first);
     return 0;
