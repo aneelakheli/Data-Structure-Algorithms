@@ -57,6 +57,15 @@ void R_Display(struct Node *p){
 }
 
 
+int sum(struct Node *p){
+    int total=0;
+    while(p!=NULL){
+        total+=p->data;
+        p=p->next;
+    }
+    return total;
+}
+
 
 //recursive count function
 
@@ -69,14 +78,97 @@ int R_count(struct Node *p){
 
 }
 
-int main(){
+int R_sum(struct Node *p){
+    if(p==NULL){
+         return 0;
+    }
+    return R_sum(p->next)+p->data;
+}
 
+
+int max_num(struct Node *p){
+    int max = 0;
+
+    while(p){
+        if(p->data >max){
+            max = p->data;
+            p= p->next;
+        }
+    }
+    return max;
+}
+
+int R_Max(struct Node *p){
+    int max =0;
+
+    if(p==NULL){
+        return 0;
+    }
+    max = R_Max(p->next);
+    if(max >p->data)
+    return max;
+    else return p->data;
+}
+
+
+//this is optimization using- "move to front" approach.
+struct Node * l_search(struct Node *p, int key){
+
+    struct Node *q= NULL;
+
+    while(p !=NULL){
+        if(key ==p->data){
+             q->next = p->next;
+             p->next = first;
+             first = p;
+             return p;
+        }
+        q=p;
+        p= p->next;
+    }
+    return NULL;
+
+}
+
+
+struct Node * R_linear_search(struct Node *p, int key){
+    if(p==NULL){
+        return NULL;
+    }
+    else if(key == p->data){
+        return p;
+    }
+    return R_linear_search(p->next, key);
+}
+
+
+int main(){
+    struct Node *temp;
     int A[] =  {2,3,4,5,6,7,8};
-    create(A,6);
+    create(A,7);
     printf("The total length is %d\n\n", count(first));
 
+    temp = l_search(first, 5);
+    if(temp){
+        printf("\n\nKey is Found %d\n\n ", temp->data);
+    }else{
+        printf("Key is not found\n\n\n");
+    }
+
+    temp = R_linear_search(first, 34);
+    if(temp){
+        printf("\n\nKey is Found %d\n\n ", temp->data);
+    }else{
+        printf("Key is not found\n\n\n");
+    }
 
     display(first);
     R_Display(first);
+    printf("\n\nThe total sum is %d\n",sum(first));
+    printf("\n\nThe total sum is %d using recursive function\n", R_sum(first));
+    printf("\n\nThe maximum number is %d\n", max_num(first));
+    printf("\n\nThe maximum number is %d using recursion\n", R_Max(first));
+
     return 0;
 }
+
