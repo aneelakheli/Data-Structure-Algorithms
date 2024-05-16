@@ -141,12 +141,38 @@ struct Node * R_linear_search(struct Node *p, int key){
     return R_linear_search(p->next, key);
 }
 
+void insert_at(struct  Node *p, int index, int x)
+{
+    struct  Node *t;
+    int i;
+    if(index <0  || index > count(p)){
+        return ;
+    }
+
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data =x;
+    if(index ==0 ){
+        t->next = first;
+        first =t;
+    }
+    else{
+        for(i=0;i<index-1;i++){
+            p =p->next;
+        }
+        t->next= p->next;
+        p->next =t;
+    }
+
+}
+
 
 int main(){
     struct Node *temp;
     int A[] =  {2,3,4,5,6,7,8};
     create(A,7);
     printf("The total length is %d\n\n", count(first));
+
+    insert_at(first, 3, 56);
 
     temp = l_search(first, 5);
     if(temp){
@@ -164,10 +190,14 @@ int main(){
 
     display(first);
     R_Display(first);
+
     printf("\n\nThe total sum is %d\n",sum(first));
     printf("\n\nThe total sum is %d using recursive function\n", R_sum(first));
     printf("\n\nThe maximum number is %d\n", max_num(first));
     printf("\n\nThe maximum number is %d using recursion\n", R_Max(first));
+
+    insert_at(first, 5, 900);
+    display(first);
 
     return 0;
 }
