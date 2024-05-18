@@ -165,14 +165,13 @@ void insert_at(struct  Node *p, int index, int x)
 
 }
 
-void create(int A[],int n){
+void create_list(int A[],int n){
     int i;
     struct Node *t,*last;
     first=(struct Node *)malloc(sizeof(struct Node));
     first->data=A[0];
     first->next=NULL;
     last=first;
-}
 for(i=1;i<n;i++){
     t=(struct Node*)malloc(sizeof(struct Node));
     t->data=A[i];
@@ -180,8 +179,74 @@ for(i=1;i<n;i++){
     last->next=t;
     last=t;
 }
+}
+void sorted_insert(struct Node *p, int x){
+    struct Node *t , *q = NULL;
+    t = (struct Node *) malloc(sizeof(struct Node));
+    t ->data =x;
+    t ->next =NULL;
+
+    if(first == NULL){
+        first = t;
+    }
+    else{
+        while(p && p ->data< x){
+            q = p;
+            p=p->next;
+        }
+        if(p ==first)
+        {
+            t->next = first;
+            first = t;
+        }
+        else{
+            t->next= q->next;
+            q->next = t;
+        }
+    }
+}
 
 
+int delete_value(struct Node *p, int index){
+    struct Node *q=NULL;
+    int x = -1,i ;
+    if(index < 1 || index >count(p)){
+        return -1;
+    }
+    if(index == 1){
+        q = first;
+        x = first ->data;
+        first= first ->next;
+        free(q);
+        return x;
+    }
+    else{
+        for(i=0; i<index; i++){
+            q=p;
+            p = p->next;
+        }
+        q->next =p->next;
+        x = p->data;
+        free(p);
+        return x;
+    }
+
+}
+
+
+int isSorted(struct Node *p){
+    int x = -6655;
+    while(p != NULL){
+        if(p->data < x){
+            return 0;
+        }
+        x= p->data;
+        p= p->next;
+    }
+    return 1;
+
+
+}
 int main(){
     struct Node *temp;
     int A[] =  {2,3,4,5,6,7,8};
@@ -213,6 +278,7 @@ int main(){
     printf("\n\nThe maximum number is %d using recursion\n", R_Max(first));
 
     insert_at(first, 5, 900);
+    delete_value(first, 3);
     display(first);
 
     return 0;
