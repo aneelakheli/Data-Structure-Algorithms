@@ -98,6 +98,21 @@ int max_num(struct Node *p){
     return max;
 }
 
+int remove_duplicate(struct Node *p){
+    struct Node *q= p->next;
+    while(q!=NULL){
+        if(p->data !=q->data){
+            p =q;
+            q=q->next;
+        }
+        else{
+            p->next = q->next;
+            free(q);
+            q= p->next;
+        }
+    }
+}
+
 int R_Max(struct Node *p){
     int max =0;
 
