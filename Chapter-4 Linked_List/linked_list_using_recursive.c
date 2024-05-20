@@ -262,6 +262,49 @@ int isSorted(struct Node *p){
 
 
 }
+
+void reverse_element(struct Node *p){
+    int *A, i=0;
+    struct Node *q;
+    A= (int *) malloc(sizeof(int) *count(p));
+
+    while(q!=NULL){
+        A[i] = q->data;
+        q = q->next;
+        i++;
+    }
+    q= p;
+    i--;
+    while(q!=NULL){
+            q->data =A[i];
+            q= q->next;
+            i--;
+    }
+
+}
+
+void reverse_address(struct Node *p){
+    struct Node *q= NULL , *r=NULL;
+    while(p!=NULL){
+        r= q;
+        q=p;
+        p=p->next;
+        q->next =r;
+    }
+    first=q;
+}
+
+
+void recursive_reverse(struct Node *q, struct Node *p){
+    if(p){
+        recursive_reverse(p, p->next);
+        p->next= q;
+    }
+    else{
+        first =q;
+    }
+}
+
 int main(){
     struct Node *temp;
     int A[] =  {2,3,4,5,6,7,8};
