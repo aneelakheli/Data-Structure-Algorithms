@@ -6,7 +6,7 @@
 struct Node{
     int data;
     struct Node *next;
-} *first = NULL;
+} *first = NULL, *second =NULL, *third =NULL;
 
 void create(int A[], int n){
     int i;
@@ -25,6 +25,25 @@ void create(int A[], int n){
 
     }
 }
+
+void create_another(int A[], int n){
+    int i;
+    struct Node *p=NULL, *last = NULL;
+    second = (struct Node *) malloc(sizeof(struct Node));
+    second ->data = A[0];
+    second -> next= NULL;
+    last = second;
+
+    for(i=1; i<n; i++){
+        p = (struct Node *) malloc(sizeof(struct Node));
+        p->data = A[i];
+        p->next = NULL;
+        last->next = p;
+        last = p;
+
+    }
+}
+
 
 int count(struct Node *p){
     int length =0;
@@ -305,9 +324,79 @@ void recursive_reverse(struct Node *q, struct Node *p){
     }
 }
 
+void concat(struct Node *p, struct Node *q){
+    third =p;
+
+    while(p->next!=NULL){
+        p =p->next;
+    }
+    p->next=q;
+}
+
+
+void merge(struct Node *p, struct Node *q){
+    struct Node *last;
+    if(p->data  <q->data){
+        third = last =p;
+        p=p->next;
+        third->next =NULL;
+    }else{
+        third = last = q;
+        q= q->next;
+        third->next = NULL;
+    }
+
+    while(p && q){
+        if(p->data < q->data){
+            last->next= p;
+            last = p;
+            p=p->next;
+            last ->next= NULL;
+        }
+        else{
+            last->next = q;
+            last =q;
+            q=q->next;
+            last ->next =NULL;
+        }
+
+    }
+    if(p) last ->next =p;
+    if(q) last ->next =q;
+}
+
+
+
 int main(){
     struct Node *temp;
-    int A[] =  {2,3,4,5,6,7,8};
+    int A[] =  {12,13,24,25,26,27,38};
+    int B[] = {10,14,36,37,48};
+    create(A, 5);
+    create_another(B, 5);
+
+
+    merge(first, second);
+
+    display(third);
+    printf("before mergering");
+
+    printf("first\n");
+    display(first);
+    printf("\n\n");
+
+
+    printf("Second \n");
+    display(second);
+    printf("\n\n");
+
+    concat(first, second);
+
+    printf("Concatinated \n");
+    display(third);
+    printf("\n\n");
+
+
+
     create(A,7);
     printf("The total length is %d\n\n", count(first));
 
