@@ -336,7 +336,7 @@ void concat(struct Node *p, struct Node *q){
 
 void merge(struct Node *p, struct Node *q){
     struct Node *last;
-    if(p->data  <q->data){
+    if(p->data  < q->data){
         third = last =p;
         p=p->next;
         third->next =NULL;
@@ -365,17 +365,46 @@ void merge(struct Node *p, struct Node *q){
     if(q) last ->next =q;
 }
 
+int is_Loop(struct Node *f){
+    struct Node *p, *q;
+    p=q=f;
+
+
+    do{
+        p=p->next;
+        q=q->next;
+        q=q?q->next:q;
+    }
+    while(p && q  &&p!= q);
+    if(p==q){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
 
 
 int main(){
     struct Node *temp;
+
+    struct Node *t1, *t2;
+    int C[] = {10,20,30,40,50};
+    create(C, 5);
+    t1 =first->next ->next;
+    t2 = first->next->next->next->next;
+    t2->next= t1;
+
+    printf("%d\n", is_Loop(first));
+
+
     int A[] =  {12,13,24,25,26,27,38};
     int B[] = {10,14,36,37,48};
     create(A, 5);
     create_another(B, 5);
 
 
-    merge(first, second);
+   // merge(first, second);
 
     display(third);
     printf("before mergering");
