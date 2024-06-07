@@ -7,6 +7,8 @@ struct BST{
 };
 struct BST *tree;
 
+typedef struct BST BinaryTree;
+
 void insert_tree(int num){
     struct BST *ptr, *parentTree, *bst_ptr;
     ptr = (struct BST *) malloc(sizeof(struct BST));
@@ -48,6 +50,32 @@ void insert_tree(int num){
 }
 
 
+void preOrderTraversal(BinaryTree *head){
+    if(head!= NULL){
+        printf("The preorder Traversal is %d \n",head->info);
+        preOrderTraversal(head->left);
+        preOrderTraversal(head->right);
+    }
+
+}
+
+
+void inOrderTraversal(BinaryTree *head){
+    if(head){
+        inOrderTraversal(head->left);
+        printf("The Inorder Traversal %d", head->data);
+        inOrderTraversal(head->right);
+    }
+}
+
+void postOrderTravesal(BinaryTree *head){
+    if(head !=NULL){
+        postOrderTravesal(head->left);
+        postOrderTravesal(head->right);
+        printf("The Post Order Traversal %d", head->data);
+    }
+
+}
 
 
 int main(){
